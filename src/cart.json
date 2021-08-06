@@ -1,0 +1,48 @@
+{
+    "cart_items": [
+        {
+            "title": "Lemon Ricotta Pancakes",
+            "platform_id": "92",
+            "quantity": 2,
+            "weight": 0,
+            "taxable": true,
+            "image": "https://cdn11.bigcommerce.com/s-xegfh/products/17594/images/19284/lemon-ricotta-pancakes-cacf3ca2__01170.1621363596.190.285.jpg?c=2",
+            "requires_shipping": true,
+            "price": 1045,
+            "line_item_key": "49ebd081-8720-48ba-84b9-348602c1e358"
+        },
+        {
+            "title": "Monterey Jack Un-Fried Chicken",
+            "platform_id": "83",
+            "quantity": 1,
+            "weight": 0,
+            "taxable": true,
+            "image": "https://cdn11.bigcommerce.com/s-xegfh/products/17591/images/19279/60646cdbef01ac6bc91a213f-b0158e5d__62263.1620260514.190.285.jpg?c=2",
+            "requires_shipping": true,
+            "price": 1045,
+            "line_item_key": "5e786d3c-b2ba-4a4b-a01c-37807eef935a"
+        },
+        {
+            "title": "Kickin’ Orange BBQ Turkey Meatloaves",
+            "platform_id": "77",
+            "quantity": 1,
+            "weight": 0,
+            "taxable": true,
+            "image": "https://cdn11.bigcommerce.com/s-xegfh/products/17588/images/19280/kickin-orange-bbq-turkey-meatloaves-19d3c0ec__54058.1620260735.190.285.jpg?c=2",
+            "requires_shipping": true,
+            "price": 1045,
+            "line_item_key": "00b29b05-4bb9-469f-8eb0-0460807e691c"
+        },
+        {
+            "title": "Beef Tenderloin with Mushroom Sauce",
+            "platform_id": "80",
+            "quantity": 1,
+            "weight": 0,
+            "taxable": true,
+            "image": "https://cdn11.bigcommerce.com/s-xegfh/products/17590/images/19281/beef-tenderloin-with-mushroom-sauce-9bc2eeb8__05164.1620260805.190.285.jpg?c=2",
+            "requires_shipping": true,
+            "price": 1045,
+            "line_item_key": "896c602f-61e8-4d3b-8cab-45369fceac44"
+        }
+    ]
+}
