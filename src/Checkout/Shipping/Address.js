@@ -155,16 +155,6 @@ export default function Address(props) {
                             </GridItem>
 
                         </Grid>
-                        {/* <Grid gridColumns={`repeat(2, 1fr)`}>
-                            <GridItem>
-                               
-                            </GridItem>
-
-                            <GridItem>
-                              
-                            </GridItem>
-
-                        </Grid> */}
                     </Form>
                 </CardContent>
             </Card>

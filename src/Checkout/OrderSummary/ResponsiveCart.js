@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-export default function SideCart(props) {
+export default function ResponsiveCart(props) {
     const classes = useStyles();
     return (
         <div>

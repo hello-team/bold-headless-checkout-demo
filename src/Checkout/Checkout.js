@@ -86,7 +86,7 @@ export default function Checkout(props) {
         let refresh = await getCheckoutState(csrfToken, orderId)
         setCheckoutState(refresh)
         if (refresh.addresses.shipping.length === 0) {
-            await setShippingAddress(csrfToken, orderId, { first_name: firstname, last_name: lastname, address_line_1: address, address_line_2: address2, country: country.name, country_code: country.iso_code, province: state.name, province_code: state.iso_code, postal_code: zip })
+            await setShippingAddress(csrfToken, orderId, { first_name: firstname, last_name: lastname, address_line_1: address, address_line_2: address2, country: country.name, country_code: country.iso_code, province: state.name, province_code: state.iso_code, city: city, postal_code: zip })
             await setShippingLine(csrfToken, orderId, deliveryMethod === 'pickup' ? 0 : 1)
             let orderstate = await getCheckoutState(csrfToken, orderId)
             console.log(orderstate)
