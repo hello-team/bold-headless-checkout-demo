@@ -16,8 +16,6 @@ const useStyles = makeStyles(() => ({
 
 export default function PaymentIframe(props) {
     const [iframeHeight, setHeight] = useState(0)
-    const [count, setCount] = useState(0)
-    const [paymentSuccess, setPaymentSuccess] = useState('')
     const classes = useStyles()
 
 
@@ -39,11 +37,6 @@ export default function PaymentIframe(props) {
         }
 
         if (message.responseType === 'PIGI_ADD_PAYMENT' && message.payload.success === true && props.checkout && props.checkout.payments.length === 0) {
-
-            setPaymentSuccess('PIGI_ADD_PAYMENT')
-            let eventCount = (count + 1)
-            console.log('eventCount', eventCount)
-            setCount(eventCount)
             console.log('iframe', props.checkout)
             await props.handlePaymentSuccess()
         }
