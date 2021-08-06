@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 
 import { ItemImage, OneTimeItemTitle } from './CheckoutItems'
-
+import CartHeader from './Header'
 const useStyles = makeStyles((theme) => ({
     root: {
         displsy: 'flex',
@@ -35,6 +35,7 @@ export default function SideCart(props) {
     const classes = useStyles();
     return (
         <div>
+            <CartHeader />
                 {props.items.map(item => (
                     <div className={classes.root}>
                         <div className={classes.details}>
