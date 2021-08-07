@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Button, AppBar, Toolbar } from "@material-ui/core";
 import { Grid, GridItem } from '@bigcommerce/big-design'
 import { makeStyles } from '@material-ui/styles';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
 import Customer from './Customer/Customer'
 import Methods from './DeliveryMethod/Methods'
 import Address from './Shipping/Address'
@@ -12,42 +8,25 @@ import { addGuest, setShippingAddress, getShippingLines, setShippingLine, update
 import PaymentIframe from './Payments/PaymentIframe'
 export default function Checkout(props) {
     const [email, setEmail] = useState('')
-
     const [context, setContext] = useState(null)
-
     const [jwtToken, setJwt] = useState(null)
-
     const [csrfToken, setCsrfToken] = useState(null)
-
     const [orderId, setOrderId] = useState(null)
-
     const [deliveryMethod, setMethod] = useState('delivery')
-
     const [firstname, setFirst] = useState('')
-
     const [lastname, setLast] = useState('')
-
     const [address, setAddress] = useState('')
-
     const [address2, setAddress2] = useState('')
-
     const [city, setCity] = useState('')
-
     const [state, setState] = useState('')
-
     const [country, setCountry] = useState('')
-
     const [zip, setZip] = useState('')
-
     const [orderStatus, setOrderStatus] = useState('order_pending')
-    
     const [orderTotal, setOrderTotal] = useState(0)
-
     const [checkoutState, setCheckoutState] = useState({})
 
-    console.log('test')
-
     useEffect(() => {
+
         if (!csrfToken) {
             setContext(props.context)
             setCsrfToken(props.context.csrf_token)
@@ -61,6 +40,7 @@ export default function Checkout(props) {
         }
 
     }, [props])
+    
 
     useEffect(() => {
         (async () => {

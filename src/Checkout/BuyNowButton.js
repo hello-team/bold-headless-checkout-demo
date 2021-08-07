@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { Button, AppBar, Toolbar, Input } from "@material-ui/core";
+import React, { useState } from "react";
+import { Button } from "@material-ui/core";
 import CheckoutLayout from './Layout'
 import cartItems from '../cart.json'
-import { createCart, startCheckout, addGuest, setShippingAddress, getCheckoutState, getPaymentIframe} from './CheckoutApi'
+import { createCart, startCheckout} from './CheckoutApi'
 
-export default function BuyNowButton(props) {
+export default function BuyNowButton() {
 const [checkoutData, setCheckoutData] = useState(null)
 
 const handleBuyNow = async () => {
