@@ -36,6 +36,8 @@ export default function PaymentIframe(props) {
             setHeight(message.payload.height)
         }
 
+        console.log({type: message.responseType, payload: message.payload})
+
         if (message.responseType === 'PIGI_ADD_PAYMENT' && message.payload.success === true && props.checkout && props.checkout.payments.length === 0) {
             console.log('iframe', props.checkout)
             await props.handlePaymentSuccess()

@@ -7,7 +7,7 @@ export const BASE_URL = `https://api.boldcommerce.com/checkout/storefront/escalc
 
 
 export const createCart = (cartItems) => {
-    return fetch(`${prod}/api/checkout/escalcfylg/init`, {
+    return fetch(`${staging}/api/checkout/escalcfylg/init`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

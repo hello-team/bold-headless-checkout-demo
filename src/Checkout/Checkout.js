@@ -7,40 +7,63 @@ import Address from './Shipping/Address'
 import { addGuest, setShippingAddress, getShippingLines, setShippingLine, updateShippingLine, getCheckoutState, submitOrder} from './CheckoutApi'
 import PaymentIframe from './Payments/PaymentIframe'
 export default function Checkout(props) {
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState(props.customer ? props.customer.email_address : '')
     const [context, setContext] = useState(null)
     const [jwtToken, setJwt] = useState(null)
     const [csrfToken, setCsrfToken] = useState(null)
     const [orderId, setOrderId] = useState(null)
     const [deliveryMethod, setMethod] = useState('delivery')
-    const [firstname, setFirst] = useState('')
-    const [lastname, setLast] = useState('')
-    const [address, setAddress] = useState('')
-    const [address2, setAddress2] = useState('')
-    const [city, setCity] = useState('')
+    const [firstname, setFirst] = useState(props.customer ? props.customer.first_name : '')
+    const [lastname, setLast] = useState(props.customer ? props.customer.last_name : '')
+    const [address, setAddress] = useState(props.customer ? props.customer.saved_addresses[0].address_line_1 : '')
+    const [address2, setAddress2] = useState(props.customer ? props.customer.saved_addresses[0].address_line_2 : '')
+    const [city, setCity] = useState(props.customer ? props.customer.saved_addresses[0].city : '')
     const [state, setState] = useState('')
     const [country, setCountry] = useState('')
-    const [zip, setZip] = useState('')
+    const [zip, setZip] = useState(props.customer ? props.customer.saved_addresses[0].zip : '')
     const [orderStatus, setOrderStatus] = useState('order_pending')
     const [orderTotal, setOrderTotal] = useState(0)
     const [checkoutState, setCheckoutState] = useState({})
 
     useEffect(() => {
 
-        if (!csrfToken) {
+        if (!csrfToken && props.context && props.context.initial_data) {
             setContext(props.context)
             setCsrfToken(props.context.csrf_token)
             setOrderId(props.context.public_order_id)
             setJwt(props.context.jwt_token)
             setOrderStatus('order_initialized')
             let appstate = props.context.application_state
+            if(appstate.customer.public_id){
+                handleLoggedInCustomer(appstate.customer.saved_addresses[0])
+            }
             setCheckoutState(appstate)
             setOrderTotal(appstate.order_total/100)
             console.log({ context: props.context })
         }
 
     }, [props])
+
+   const handleLoggedInCustomer = (address) => {
+
+      let countryVal = props.context.initial_data.country_info.filter(x => x.iso_code === address.country_code)[0]
+      let countryIndex = props.context.initial_data.country_info.findIndex(x => x.iso_code === address.country_code)
+
+      countryVal.index = countryIndex
+
+      setCountry(countryVal)
+
+      let stateVal = props.context.initial_data.country_info[countryIndex].provinces.filter(x => x.iso_code === address.province_code)[0]
+
+      let stateIndex = props.context.initial_data.country_info[countryIndex].provinces.findIndex(x => x.iso_code === address.province_code)
+
+      stateVal.index = stateIndex
+      console.log(stateVal)
+
+      setState(stateVal)
+    }
     
+
 
     useEffect(() => {
         (async () => {
@@ -107,14 +130,12 @@ export default function Checkout(props) {
 
     const handlePaymentNow = async (event) => {
         event.preventDefault()
+        await handleSetAddress()
         const iframeElement = document.querySelector('iframe#PIGI');
 
         let refresh = await getCheckoutState(csrfToken, orderId)
          await setCheckoutState(refresh)
         if(refresh.payments.length === 0){
-            iframeElement.contentWindow.postMessage({
-                actionType: 'PIGI_REFRESH_ORDER'
-            }, '*');
 
             iframeElement.contentWindow.postMessage({
                 actionType: 'PIGI_ADD_PAYMENT'
@@ -150,7 +171,6 @@ export default function Checkout(props) {
                             country_info={props.context.initial_data.country_info}
                             initial_data={props.context.initial_data}
                             handleGuest={handleGuest}
-                            handleSetAddress={handleSetAddress}
                             handleFirstName={(val) => setFirst(val)}
                             handleLastName={(val) => setLast(val)}
                             handleAddress={(val) => setAddress(val)}

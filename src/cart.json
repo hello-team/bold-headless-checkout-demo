@@ -44,5 +44,11 @@
             "price": 1045,
             "line_item_key": "896c602f-61e8-4d3b-8cab-45369fceac44"
         }
-    ]
+    ],
+    "customer": {
+        "email_address": "jake.smith@boldcommerce.com",
+        "first_name": "Jake",
+        "last_name": "Smith",
+        "platform_id": "1"
+    }
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, AppBar, Toolbar, Card, CardHeader, CardContent, TextField, Select, MenuItem } from "@material-ui/core";
+import { Collapse, Button, AppBar, Toolbar, Card, CardHeader, CardContent, TextField, Select, MenuItem } from "@material-ui/core";
 import { Grid, GridItem, Form, FormGroup } from '@bigcommerce/big-design'
 import { makeStyles } from '@material-ui/styles';
 
@@ -13,6 +13,8 @@ const useStyles = makeStyles(() => ({
 
 export default function Address(props) {
     const classes = useStyles()
+
+
 
     return (
         <div>
@@ -146,7 +148,6 @@ export default function Address(props) {
                                 value={props.zip}
                                 margin="dense"
                                 onChange={(e) => props.handleZip(e.target.value)}
-                                onBlur={props.handleSetAddress}
                                 inputProps={{
                                     autoComplete: 'postal-code',
                                 }}

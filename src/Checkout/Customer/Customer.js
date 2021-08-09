@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Card, CardHeader, CardContent, TextField } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { Collapse, Card, CardHeader, CardContent, TextField } from "@material-ui/core";
 import { Form, FormGroup } from '@bigcommerce/big-design'
 import { makeStyles } from '@material-ui/styles';
 
@@ -11,8 +11,11 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function Customer(props) {
+    const classes = useStyles()
+
     const [customer, setCustomer] = useState(null)
-const classes = useStyles()
+    
+
     return (
         <div>
             <Card style={{boxShadow: 'none'}}>
