@@ -29,7 +29,7 @@ export default function CheckoutLayout(props) {
             {width > 900 ?
             <Grid gridColumns={`repeat(2, 1fr)`}>
                 <GridItem style={{ width: '90%', margin: 'auto', float: 'right' }}>
-                    <Checkout context={props.feed} customer={props.feed.application_state.customer.public_id ? props.feed.application_state.customer : null}/>
+                    <Checkout context={props.feed} customer={props.feed.application_state.customer && props.feed.application_state.customer.saved_addresses && props.feed.application_state.customer.saved_addresses.length !== 0  ? props.feed.application_state.customer : null}/>
                 </GridItem>
                 <GridItem style={{ backgroundColor: '#fafafa', float: 'left' }}>
                     <SideCart items={props.feed ? props.feed.cart_items : []}/>
@@ -37,7 +37,7 @@ export default function CheckoutLayout(props) {
             </Grid>
             : 
             <div>
-                <Checkout context={props.feed} customer={props.feed.application_state.customer.public_id ? props.feed.application_state.customer : null} />
+                <Checkout context={props.feed} customer={props.feed.application_state.customer && props.feed.application_state.customer.saved_addresses && props.feed.application_state.customer.saved_addresses.length !== 0 ? props.feed.application_state.customer : null} />
             </div>}
         </div>
     )

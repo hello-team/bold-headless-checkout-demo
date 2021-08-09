@@ -13,9 +13,9 @@ export default function App(props) {
         <div style={{display: flow === 'buynow' ? 'none' : ''}}>
           <CheckoutButton feed={props} handleFlow={(e) => handleFlow(e)} />
         </div>
-        <div style={{display: flow === 'checkout' ? 'none' : ''}}>
+        {/* <div style={{display: flow === 'checkout' ? 'none' : ''}}>
         <BuyNowButton feed={props}  handleFlow={(e) => handleFlow(e)} />
-        </div>
+        </div> */}
     </div>
   );
 }

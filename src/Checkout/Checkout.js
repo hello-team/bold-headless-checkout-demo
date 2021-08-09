@@ -34,7 +34,7 @@ export default function Checkout(props) {
             setJwt(props.context.jwt_token)
             setOrderStatus('order_initialized')
             let appstate = props.context.application_state
-            if(appstate.customer.public_id){
+            if(appstate.customer.saved_addresses && appstate.customer.saved_addresses.length !== 0){
                 handleLoggedInCustomer(appstate.customer.saved_addresses[0])
             }
             setCheckoutState(appstate)
