@@ -38,6 +38,44 @@ export const addGuest = async (csrf, order, customer) => {
     return data;
 }
 
+export const addCoupon = async (csrf, order, code) => {
+        axios.defaults.headers.common = {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN': csrf,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        };
+        axios.defaults.withCredentials = true
+        let { data } = await axios.post(`${BASE_URL}/${order}/discounts`, {code: code})
+        return data;
+
+}
+
+
+export const removeCoupon = async (csrf, order, code) => {
+    axios.defaults.headers.common = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN': csrf,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    };
+    axios.defaults.withCredentials = true
+    let { data } = await axios.delete(`${BASE_URL}/${order}/discounts?code=${code}`, {code: code})
+    return data;
+}
+
+export const validateCoupon = async (csrf, order, code) => {
+    axios.defaults.headers.common = {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-TOKEN': csrf,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    };
+    axios.defaults.withCredentials = true
+    let { data } = await axios.get(`${BASE_URL}/${order}/validate_discount_code?discount_code=${code}`)
+    return data;
+}
+
 export const setShippingAddress = async (csrf, order, shippingData) => {
     axios.defaults.headers.common = {
         'X-Requested-With': 'XMLHttpRequest',
@@ -131,3 +169,4 @@ export const getPaymentIframe = async (csrf, order, token) => {
     let {data} = await axios.post(`${BASE_URL}/${order}/process_order`)
     return { order: data }
 }
+

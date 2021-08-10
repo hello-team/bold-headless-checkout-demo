@@ -27,20 +27,18 @@ export default function Checkout(props) {
 
     useEffect(() => {
 
-        if (!csrfToken && props.context && props.context.initial_data) {
             setContext(props.context)
             setCsrfToken(props.context.csrf_token)
             setOrderId(props.context.public_order_id)
             setJwt(props.context.jwt_token)
             setOrderStatus('order_initialized')
-            let appstate = props.context.application_state
+            let appstate = props.application
             if(appstate.customer.saved_addresses && appstate.customer.saved_addresses.length !== 0){
                 handleLoggedInCustomer(appstate.customer.saved_addresses[0])
             }
             setCheckoutState(appstate)
             setOrderTotal(appstate.order_total/100)
             console.log({ context: props.context })
-        }
 
     }, [props])
 
@@ -61,13 +59,15 @@ export default function Checkout(props) {
       console.log(stateVal)
 
       setState(stateVal)
+
     }
     
 
 
     useEffect(() => {
         (async () => {
-            let refresh = await getCheckoutState(csrfToken, orderId)
+           
+            let refresh = await props.handleRefresh()
             await setCheckoutState(refresh)
             await setOrderTotal(refresh.order_total/100)
         })()
@@ -75,7 +75,7 @@ export default function Checkout(props) {
     }, [orderStatus])
 
     const handleGuest = async () => {
-        let refresh = await getCheckoutState(csrfToken, orderId)
+        let refresh = await props.handleRefresh()
         setCheckoutState(refresh)
         if (refresh.customer.email_address.length === 0) {
             await addGuest(csrfToken, orderId, { email_address: email, first_name: firstname, last_name: lastname })
@@ -86,7 +86,7 @@ export default function Checkout(props) {
     }
 
     const handleSetAddress = async () => {
-        let refresh = await getCheckoutState(csrfToken, orderId)
+        let refresh = await props.handleRefresh()
         setCheckoutState(refresh)
         if (refresh.addresses.shipping.length === 0) {
             await setShippingAddress(csrfToken, orderId, { first_name: firstname, last_name: lastname, address_line_1: address, address_line_2: address2, country: country.name, country_code: country.iso_code, province: state.name, province_code: state.iso_code, city: city, postal_code: zip })
@@ -150,15 +150,16 @@ export default function Checkout(props) {
     }
 
     const handlePaymentSuccess = async () => {
-        let refresh = await getCheckoutState(csrfToken, orderId)
+        let refresh = await props.handleRefresh()
         console.log({payment: refresh})
         let { order } = await submitOrder(csrfToken, orderId)
         let application_state = order.data.application_state
         console.log('application_state', application_state)
 
         await setCheckoutState(application_state)
-
     }
+
+
 
     return (
         <div>

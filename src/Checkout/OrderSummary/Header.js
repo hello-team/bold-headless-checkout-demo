@@ -11,14 +11,8 @@ import {
 
 export default function CartHeader(props) {
     return (
-        <Card>
-            <CardHeader
-                title={<div><Typography component="h5" variant="h5" style={{ float: 'left' }} className={'product-title'}>
+     <div><Typography component="h5" variant="h5" style={{ float: 'left', display: 'table'  }} className={'product-title'}>
                     <em>Order Summary</em>
-                </Typography></div>}
-            />
-            <CardContent>
-            </CardContent>
-        </Card>
+     </Typography></div>
         )
 }

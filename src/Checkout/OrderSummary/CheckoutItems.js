@@ -14,48 +14,42 @@ import { Grid, GridItem } from '@bigcommerce/big-design'
 
 export const SubscriptionTitle = (props) => {
     return (
-        <CardHeader
-            title={<div>
-                <Typography key={"title"} style={{ float: 'left' }} className={'product-title'}>
-                    <em style={{ color: 'red' }} >{props.item.interval_text}</em><em style={{ color: 'red' }} > Subscription!</em>
-                    <br />
-                    <em>{props.item.name}</em> <br />
-                </Typography>
-            </div>}
-        />
+        <div>
+            <Typography key={"title"} style={{ float: 'left' }} className={'product-title'}>
+                <em style={{ color: 'red' }} >{props.item.interval_text}</em><em style={{ color: 'red' }} > Subscription!</em>
+                <br />
+                <em>{props.item.name}</em> <br />
+            </Typography>
+        </div>
     )
 }
 
 export const OneTimeItemTitle = (props) => {
     return (
-        <CardHeader
-            title={<div>
-                <Typography key={props.item.id} style={{ float: 'left' }} className={'product-title'}>
-                    <em>{props.item.name}</em> <br />
-                    <span>
-                    <em>{formatMoney(props.item.total_price/100) }</em> <br />
-                    </span>
-                </Typography>
-            </div>}
-            // subheader={
-            //     <div>
-            //     <Typography key={"title"} style={{ float: 'right' }} className={'product-price'}>
-            //         <em>{formatMoney(props.item.total_price/100) }</em> <br />
-            //     </Typography>
-            // </div>
-            // }
-        />
+        <div>
+            <Typography key={props.item.id} style={{ float: 'right', display: 'flex' }} className={'product-title'}>
+                {props.item.name}
+            </Typography>
+        </div>
+    )
+}
+
+export const Price = (props) => {
+    return (
+        <Typography>
+            <em>{formatMoney(props.item.price / 100)} x {props.item.quantity}</em> <br />
+        </Typography>
     )
 }
 
 export const ItemImage = (props) => {
     return (
         <CardMedia
-        component="img"
-        src={props.item.image_url}
-        alt={props.item.name}
-        key={`image-${props.item.id}`}
-    />
+            component="img"
+            src={props.item.image_url}
+            alt={props.item.name}
+            key={`image-${props.item.id}`}
+        />
     )
 }
 

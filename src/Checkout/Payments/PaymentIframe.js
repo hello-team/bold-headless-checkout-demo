@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Input, Button, AppBar, Toolbar, Card, CardHeader, CardContent, TextField } from "@material-ui/core";
 import { Grid, GridItem, Form, FormGroup } from '@bigcommerce/big-design'
 import { makeStyles } from '@material-ui/styles';
+import { formatMoney } from 'accounting';
 
 
 export const BASE_URL = `https://api.boldcommerce.com/checkout/storefront/escalcfylg`
@@ -11,6 +12,10 @@ const useStyles = makeStyles(() => ({
     textField: {
         width: '100%',
         borderRadius: '5px',
+        boxShadow: '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%)',
+        width: '100%',
+        backgroundColor: '#000', 
+        color: '#fff'
     },
 }));
 
@@ -75,8 +80,8 @@ export default function PaymentIframe(props) {
                             style={{ width: '100%', border: 'none', height: iframeHeight }}
                         >
                         </iframe>
-                        <Button type='submit' variant="outlined" onClick={(e) => props.handlePaymentNow(e)} style={{ width: '100%', backgroundColor: '#000', color: '#fff' }}>
-                            Pay {props.orderTotal}
+                        <Button type='submit' variant="outlined" onClick={(e) => props.handlePaymentNow(e)} className={classes.textField}>
+                            Pay {formatMoney(props.orderTotal)}
                         </Button>
                     </div>
                 </CardContent>

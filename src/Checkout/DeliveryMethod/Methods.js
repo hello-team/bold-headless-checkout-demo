@@ -9,7 +9,6 @@ import StorefrontIcon from '@material-ui/icons/Storefront';
 const useStyles = makeStyles(() => ({
 
     textField: {
-        padding: '1rem',
         width: '100%',
         borderWidth: '1px',
         borderStyle: 'solid',
@@ -20,7 +19,6 @@ const useStyles = makeStyles(() => ({
         marginLeft: '0px !important',
     },
     textField2: {
-        padding: '1rem',
         width: '100%',
         borderWidth: '1px',
         borderStyle: 'solid',
@@ -48,9 +46,11 @@ export default function Methods(props) {
                     title={'Delivery method'}
                 />
                 <CardContent>
-                    <RadioGroup value={props.method} onChange={(e) => props.handleChangeMethod(e.target.value)} style={{ width: '100%', margin: 'auto' }}>
+                <Form style={{padding: '1rem'}}>
+                        <FormGroup>
+                    <RadioGroup value={props.method} onChange={(e) => props.handleChangeMethod(e.target.value)} style={{ display: 'flex', width: '100%', margin: 'auto' }}>
                         <FormControlLabel className={classes.textField} value="delivery" 
-                         control={<Radio />} labelPlacement="end" label={<div style={{ display: 'flex' }}>
+                         control={<Radio margin="dense" />} labelPlacement="end" label={<div style={{ display: 'flex' }}>
                             <Typography className={props.method === 'delivery' ? classes.selectedOption : classes.availableOption} style={{ paddingRight: '1rem' }} >
                                 <LocalShippingIcon />
                             </Typography>
@@ -58,7 +58,7 @@ export default function Methods(props) {
                                 Ship
                                 </Typography>
                         </div>} />
-                        <FormControlLabel className={classes.textField2} value="pickup" control={<Radio />} labelPlacement="end" label={<div style={{ display: 'flex' }}>
+                        <FormControlLabel className={classes.textField2} value="pickup" control={<Radio margin="dense"/>} labelPlacement="end" label={<div style={{ display: 'flex' }}>
                             <Typography className={props.method === 'pickup' ? classes.selectedOption : classes.availableOption} style={{ paddingRight: '1rem' }}>
                                 <StorefrontIcon />
                             </Typography>
@@ -67,7 +67,8 @@ export default function Methods(props) {
                                 </Typography>
                         </div>} />
                     </RadioGroup>
-
+                    </FormGroup>
+                    </Form>
                 </CardContent>
             </Card>
         </div>
