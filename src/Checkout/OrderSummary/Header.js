@@ -12,7 +12,7 @@ import {
 export default function CartHeader(props) {
     return (
      <div><Typography component="h5" variant="h5" style={{ float: 'left', display: 'table'  }} className={'product-title'}>
-                    <em>Order Summary</em>
+                    <strong>Order Summary</strong>
      </Typography></div>
         )
 }

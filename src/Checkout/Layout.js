@@ -4,10 +4,13 @@ import { makeStyles } from '@material-ui/styles';
 import Checkout from './Checkout'
 import SideCart from './OrderSummary/SideCart'
 import { getCheckoutState } from './CheckoutApi'
+import MobileCart from './OrderSummary/MobileSummary'
+
 
 export default function CheckoutLayout(props) {
     const [width, setWindowWidth] = useState(0)
     const [appstate, setAppState] = useState(props.feed.application_state)
+
     console.log('items', props.feed.cart_items)
 
     useEffect(() => {
@@ -34,6 +37,7 @@ export default function CheckoutLayout(props) {
         setWindowWidth(document.querySelector('#checkout').offsetWidth)
     }
 
+
     return (
         <div >
             {width > 900 ?
@@ -47,8 +51,14 @@ export default function CheckoutLayout(props) {
                 </Grid>
                 :
                 <div>
-                    <Checkout handleRefresh={handleRefresh} application={appstate} context={props.feed} customer={appstate.customer && appstate.customer.saved_addresses && appstate.customer.saved_addresses.length !== 0 ? appstate.customer : null} />
-                </div>}
+                <div style={{marginBottom: '5rem'}}> 
+                    <Checkout handleRefresh={handleRefresh} application={appstate} context={props.feed} customer={appstate.customer && appstate.customer.saved_addresses && appstate.customer.saved_addresses.length !== 0 ? appstate.customer : null}  />
+                </div>
+                <div>
+                <MobileCart handleRefresh={handleRefresh} orderId={props.feed.public_order_id} csrfToken={props.feed.csrf_token} items={props.feed ? props.feed.cart_items : []} application={appstate} />
+                </div>
+                </div>
+                }
         </div>
     )
 

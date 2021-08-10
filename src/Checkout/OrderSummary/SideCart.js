@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from '@material-ui/styles';
 import {
     Divider,
     Card,
@@ -20,6 +19,7 @@ import CartHeader from './Header'
 
 import { addCoupon, removeCoupon, validateCoupon } from '../CheckoutApi'
 import { Discounts } from './Discounts'
+import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles((theme) => ({
     layout: {
